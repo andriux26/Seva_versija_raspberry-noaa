@@ -2,7 +2,7 @@
 
 
 buster legacy os
-
+Buster Legacy Os
 
 # NOAA and Meteor automated capture using Raspberry PI
 Most of the code and setup stolen from: [Instructables](https://www.instructables.com/id/Raspberry-Pi-NOAA-Weather-Satellite-Receiver/)
