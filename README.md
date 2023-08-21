@@ -1,7 +1,7 @@
 ![Raspberry NOAA](header_1600.png)
 
 
-buster legacy os
+
 Buster Legacy Os
 
 # NOAA and Meteor automated capture using Raspberry PI
