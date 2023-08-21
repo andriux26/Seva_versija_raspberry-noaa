@@ -282,15 +282,13 @@ timezone=$(echo $timezone | sed 's/\//\\\//g')
 sed -i -e "s/date_default_timezone_set('.*');/date_default_timezone_set('${timezone}');/" "/var/www/wx/header.php"
 
 echo "
-    It's time to configure your ground station
-    You'll be asked for your latitude and longitude
-    Use negative values for South and West
+   Nustatymai
     "
 
-read -rp "Enter your latitude (55.57): "
+read -rp "Platuma Panevezys (55.57): "
     lat=$REPLY
 
-read -rp "Enter your longitude (24.25): "
+read -rp "Ilguma Panevezys (24.25): "
     lon=$REPLY
 
 # note: this can probably be improved by calculating this
@@ -303,11 +301,11 @@ sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/${lon}/g" "$HOME/.wxtoi
 sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/$(echo  "$lon * -1" | bc)/g" "$HOME/.predict/predict.qth"
 sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/${lon}/g;s/change_tz/$(echo  "$tzoffset * -1" | bc)/g" "sun.py"
 
-success "Install done! Double check your $HOME/.noaa.conf settings"
+success "Nustatymai baikti! Pasitikrinti $HOME/.noaa.conf settings"
 
 echo "
-    If you want to post your images to Twitter, please setup
-    your Twitter credentials on $HOME/.tweepy.conf
+    Twitterio nustatymai
+    Twitter  $HOME/.tweepy.conf
 "
 
 set +e
