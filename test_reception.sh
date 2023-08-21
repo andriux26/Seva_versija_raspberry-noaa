@@ -11,7 +11,7 @@ fi
 . "$NOAA_HOME/common.sh"
 
 if [ -z "$1" ]; then
-    log "Usage: $0 <frequency>. Example: $0 90.3" "ERROR"
+    log "Usage: $0 <frequency>. Example: $0 106.0" "ERROR"
     exit 1
 fi
 
