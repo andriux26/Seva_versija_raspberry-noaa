@@ -264,7 +264,7 @@ echo "
 # language configuration
 langs=($(find templates/webpanel/language/ -type f -printf "%f\n" | cut -f 1 -d '.'))
 while : ; do
-    read -rp "Enter your preferred language (${langs[*]}): "
+    read -rp "Pasirink Kalba (${langs[*]}): "
     lang=$REPLY
 
     if [[ ! " ${langs[@]} " =~ " ${lang} " ]]; then
@@ -276,7 +276,7 @@ done
 sed -i -e "s/'lang' => '.*'$/'lang' => '${lang}'/" "/var/www/wx/Config.php"
 
 echo "Visit https://www.php.net/manual/en/timezones.php for a list of available timezones"
-read -rp "Enter your preferred timezone: "
+read -rp "Ivesti -> Europe/Vilnius: "
     timezone=$REPLY
 timezone=$(echo $timezone | sed 's/\//\\\//g')
 sed -i -e "s/date_default_timezone_set('.*');/date_default_timezone_set('${timezone}');/" "/var/www/wx/header.php"
@@ -287,15 +287,15 @@ echo "
     Use negative values for South and West
     "
 
-read -rp "Enter your latitude (South values are negative): "
+read -rp "Enter your latitude (55.57): "
     lat=$REPLY
 
-read -rp "Enter your longitude (West values are negative): "
+read -rp "Enter your longitude (24.25): "
     lon=$REPLY
 
 # note: this can probably be improved by calculating this
 # automatically - good for a future iteration
-read -rp "Enter your timezone offset (ex: -3 for Argentina time): "
+read -rp "Laiko zonos ( Vasara 3 Ziema 2): "
     tzoffset=$REPLY
 
 sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/${lon}/g" "$HOME/.noaa.conf"
