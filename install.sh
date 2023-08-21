@@ -39,11 +39,11 @@ fi
 
 ### Verify cloned repo
 if [ ! -e "$HOME/raspberry-noaa" ]; then
-    die "Is https://github.com/reynico/raspberry-noaa cloned in your home directory?"
+    die "Is https://github.com/andriux26/raspberry-noaa.git atsiunciama ?"
 fi
 
 ### Install required packages
-log_running "Installing required packages..."
+log_running "Instaliuojami paketai..."
 
 raspbian_version="$(lsb_release -c --short)"
 
