@@ -312,5 +312,5 @@ set +e
 
 ### Running WXTOIMG to have the user accept the licensing agreement
 wxtoimg
-
+cd /raspberry-noaa ./schedule.sh -x
 sudo reboot
