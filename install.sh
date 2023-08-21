@@ -275,7 +275,7 @@ while : ; do
 done
 sed -i -e "s/'lang' => '.*'$/'lang' => '${lang}'/" "/var/www/wx/Config.php"
 
-echo "Visit https://www.php.net/manual/en/timezones.php for a list of available timezones"
+echo "Laiko zonu pavizdziai https://www.php.net/manual/en/timezones.php "
 read -rp "Ivesti -> Europe/Vilnius: "
     timezone=$REPLY
 timezone=$(echo $timezone | sed 's/\//\\\//g')
