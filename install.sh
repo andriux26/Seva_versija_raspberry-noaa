@@ -319,4 +319,18 @@ echo "
 
 
 ./schedule.sh -x
+
+
+
+echo "
+    Sistema Perkraunama
+"
+
+
+
+
+
+
+
+
 sudo reboot
