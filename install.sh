@@ -312,5 +312,11 @@ set +e
 
 ### Running WXTOIMG to have the user accept the licensing agreement
 wxtoimg
+
+echo "
+    Atsiunciama Palidovu Laikai
+"
+
+
 ./schedule.sh -x
 sudo reboot
