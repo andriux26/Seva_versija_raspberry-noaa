@@ -8,3 +8,4 @@ do
     chmod 755 $file
   fi
 done
+./install.sh
