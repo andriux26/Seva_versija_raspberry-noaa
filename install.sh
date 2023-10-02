@@ -318,8 +318,8 @@ echo "
 "
 
 
-./schedule.sh -x
-./sh.sh
+./schedule.sh -t -x
+
 
 
 echo "
