@@ -246,7 +246,7 @@ fi
 
 success "Install (almost) done!"
 
-read -rp "Do you want to enable bias-tee? (y/N)"
+read -rp "Ijunkti stiptintuva bias-tee? (y/N)"
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     sed -i -e "s/enable_bias_tee/-T/g" "$HOME/.noaa.conf"
     log_done "Bias-tee is enabled!"
