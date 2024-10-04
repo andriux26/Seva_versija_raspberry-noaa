@@ -9,15 +9,14 @@ fi
 ## import common lib
 . "$HOME/.noaa.conf"
 . "$NOAA_HOME/common.sh"
-wget -qr http://www.celestrak.org/NORAD/elements/active.txt -O "${NOAA_HOME}"/predict/active.txt
-wget -qr http://www.celestrak.org/NORAD/elements/weather.txt -O "${NOAA_HOME}"/predict/weather.txt
-wget -qr http://www.celestrak.org/NORAD/elements/amateur.txt -O "${NOAA_HOME}"/predict/amateur.txt
-grep "NOAA 15" "${NOAA_HOME}"/predict/active.txt -A 2 > "${NOAA_HOME}"/predict/active.tle
-grep "NOAA 18" "${NOAA_HOME}"/predict/active.txt -A 2 >> "${NOAA_HOME}"/predict/active.tle
-grep "NOAA 19" "${NOAA_HOME}"/predict/active.txt -A 2 >> "${NOAA_HOME}"/predict/active.tle
-grep "METEOR-M2 3" "${NOAA_HOME}"/predict/active.txt -A 2 >> "${NOAA_HOME}"/predict/active.tle
+wget -qr http://www.celestrak.com/NORAD/elements/weather.txt -O "${NOAA_HOME}"/predict/weather.txt
+wget -qr http://www.celestrak.com/NORAD/elements/amateur.txt -O "${NOAA_HOME}"/predict/amateur.txt
+grep "NOAA 15" "${NOAA_HOME}"/predict/weather.txt -A 2 > "${NOAA_HOME}"/predict/weather.tle
+grep "NOAA 18" "${NOAA_HOME}"/predict/weather.txt -A 2 >> "${NOAA_HOME}"/predict/weather.tle
+grep "NOAA 19" "${NOAA_HOME}"/predict/weather.txt -A 2 >> "${NOAA_HOME}"/predict/weather.tle
+grep "METEOR-M 2" "${NOAA_HOME}"/predict/weather.txt -A 2 >> "${NOAA_HOME}"/predict/weather.tle
 if [ "$SCHEDULE_ISS" == "true" ]; then
-    grep "ZARYA" "${NOAA_HOME}"/predict/active.txt -A 2 > "${NOAA_HOME}"/predict/active.tle
+    grep "ZARYA" "${NOAA_HOME}"/predict/amateur.txt -A 2 > "${NOAA_HOME}"/predict/amateur.tle
 fi
 
 #Remove all AT jobs
