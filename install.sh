@@ -57,7 +57,7 @@ sudo apt install -yq predict \
                      python-setuptools \
                      ntp \
                      cmake \
-                     libusb-1.0 \
+                     libusb-1.0-0-dev \
                      sox \
                      at \
                      bc \
@@ -73,7 +73,7 @@ sudo apt install -yq predict \
                      libjpeg9-dev \
                      socat \
                      php7.2-fpm \
-                     php7.2-sqlite \
+                     php7.2-sqlite3 \
                      sqlite3
 
 if [ "$raspbian_version" == "stretch" ]; then
