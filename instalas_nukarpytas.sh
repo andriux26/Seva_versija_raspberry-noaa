@@ -250,7 +250,7 @@ read -rp "Laiko zonos ( Vasara 3 Ziema 2): "
     tzoffset=$REPLY
 
 sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/${lon}/g" "$HOME/.noaa.conf"
-sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/${lon}/g" "$HOME/.wxtoimgrc"
+#sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/${lon}/g" "$HOME/.wxtoimgrc"
 sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/$(echo  "$lon * -1" | bc)/g" "$HOME/.predict/predict.qth"
 sed -i -e "s/change_latitude/${lat}/g;s/change_longitude/${lon}/g;s/change_tz/$(echo  "$tzoffset * -1" | bc)/g" "sun.py"
 
@@ -264,7 +264,7 @@ echo "
 set +e
 
 ### Running WXTOIMG to have the user accept the licensing agreement
-wxtoimg
+#wxtoimg
 
 echo "
     Atsiunciama Palidovu Laikai
