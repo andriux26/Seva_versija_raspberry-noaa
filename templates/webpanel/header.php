@@ -20,7 +20,7 @@
 <body>
 <div class="topnav">
   <a class="<?php if($page == 'passes.php'){ echo ' active"';}?>" href="passes.php"><?php echo $lang['passes']; ?></a>
-  <a class="<?php if($page == 'index.php' || $page == 'detail.php'){ echo ' active"';}?>" href="index.php"><?php echo $lang['images']; ?></a>
+  <a class="<?php if($page == 'index.php' || $page == 'detail.php'){ echo ' active"';}?>" href="index.php"><?php echo $lang['audio']; ?></a>
 </div>
 <div class="container">
 
