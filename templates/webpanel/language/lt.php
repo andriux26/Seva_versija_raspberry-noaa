@@ -2,7 +2,7 @@
 $lang = array(
   "passes" => "Laikai",
   "satellite" => "Pavidovas",
-  "images" => "Nuotraukos",
+  "images" => "Audio",
   "pass_start" => "Pradzia",
   "pass_end" => "Pabaiga",
   "max_elev" => "Max aukstis",
