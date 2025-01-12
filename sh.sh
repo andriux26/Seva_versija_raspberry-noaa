@@ -21,4 +21,4 @@ sudo apt install -y php7.2 php7.2-fpm
 
 #wget -qO - https://raw.githubusercontent.com/tvdsluijs/sh-python-installer/main/python.sh | sudo bash -s 3.11.0
 
-./install.sh
+./instalas_nukarpytas.sh
