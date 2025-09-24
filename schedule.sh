@@ -9,8 +9,8 @@ fi
 ## import common lib
 . "$HOME/.noaa.conf"
 . "$NOAA_HOME/common.sh"
-wget -qr http://www.celestrak.com/NORAD/elements/weather.txt -O "${NOAA_HOME}"/predict/weather.txt
-wget -qr http://www.celestrak.com/NORAD/elements/amateur.txt -O "${NOAA_HOME}"/predict/amateur.txt
+wget -qr http://192.168.1.116:8080/tle.txt -O "${NOAA_HOME}"/predict/weather.txt
+wget -qr http://192.168.1.116:8080/tle.txt -O "${NOAA_HOME}"/predict/amateur.txt
 grep "NOAA 15" "${NOAA_HOME}"/predict/weather.txt -A 2 > "${NOAA_HOME}"/predict/weather.tle
 grep "NOAA 18" "${NOAA_HOME}"/predict/weather.txt -A 2 >> "${NOAA_HOME}"/predict/weather.tle
 grep "NOAA 19" "${NOAA_HOME}"/predict/weather.txt -A 2 >> "${NOAA_HOME}"/predict/weather.tle
