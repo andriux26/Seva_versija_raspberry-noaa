@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# ---------- KONFIGAS (keisk, jei reikia) ----------
+# ---------- KONFIGAS ----------
 REPO_URL="https://github.com/andriux26/Seva_versija_raspberry-noaa.git"
 
 APP_USER="${SUDO_USER:-${USER}}"
@@ -9,13 +9,11 @@ APP_HOME="/home/${APP_USER}"
 APP_DIR="${APP_HOME}/Seva_versija_raspberry-noaa"
 VENV_DIR="${APP_DIR}/.venv"
 
-# Kur rodys Nginx (čia rinksis PNG/JPG/HTML). Jei projektas rašo kitur – gali pataisyti.
 WEB_ROOT="${APP_HOME}/raspberry-noaa/www"
 LOG_DIR="${APP_HOME}/raspberry-noaa"
 NGINX_SITE="/etc/nginx/sites-available/rasp-noaa"
 NGINX_LINK="/etc/nginx/sites-enabled/rasp-noaa"
 
-# Cron (kas 15 min kviečia schedule.sh)
 CRON_LINE="*/15 * * * * ${APP_DIR}/schedule.sh >> ${LOG_DIR}/schedule.log 2>&1"
 
 # ---------- VĖLIAVOS ----------
@@ -36,10 +34,31 @@ need_root() { [[ "$(id -u)" -eq 0 ]] || { echo "Paleisk su sudo"; exit 1; }; }
 apt_install() {
   echo "[1/7] Atnaujinu OS ir diegiu paketus..."
   apt-get update -y
-  DEBIAN_FRONTEND=noninteractive apt-get install -y \
-    git python3 python3-venv python3-pip \
+
+  # Nustatom OS versiją
+  OS_CODENAME=$(lsb_release -sc || echo "unknown")
+  echo "→ OS versija: $OS_CODENAME"
+
+  # Bendri paketai
+  PKGS="git python3 python3-venv python3-pip \
     rtl-sdr sox imagemagick bc jq curl coreutils sed gawk \
-    hamlib ntp cron nginx
+    ntp cron nginx"
+
+  # Hamlib pagal OS
+  case "$OS_CODENAME" in
+    bookworm|trixie|sid)
+      PKGS="$PKGS libhamlib-utils libhamlib4"
+      ;;
+    bullseye|buster)
+      PKGS="$PKGS hamlib"
+      ;;
+    *)
+      echo "⚠️  Neatpažinta OS ($OS_CODENAME) — bandau su libhamlib-utils libhamlib4"
+      PKGS="$PKGS libhamlib-utils libhamlib4"
+      ;;
+  esac
+
+  DEBIAN_FRONTEND=noninteractive apt-get install -y $PKGS
   systemctl enable --now cron || true
   systemctl enable --now nginx || true
 }
@@ -78,7 +97,6 @@ setup_venv() {
 run_project_install() {
   echo "[5/7] Projekto install.sh (jei yra)..."
   if [[ -x "${APP_DIR}/install.sh" ]]; then
-    # Paleidžiam taip, kad naudotų tą patį user'į/kelius
     bash "${APP_DIR}/install.sh" || true
   else
     echo "  install.sh nerastas arba ne vykdomas — tęsiu be jo."
@@ -107,7 +125,6 @@ NG
 
 setup_cron() {
   echo "[7/7] Cron įrašas planuotojui..."
-  # Įrašom į APP_USER crontab
   crontab -u "${APP_USER}" -l 2>/dev/null | grep -F "${CRON_LINE}" >/dev/null || \
     ( crontab -u "${APP_USER}" -l 2>/dev/null; echo "${CRON_LINE}" ) | crontab -u "${APP_USER}" -
   echo "Dabartinis ${APP_USER} crontab:"
