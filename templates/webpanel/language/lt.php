@@ -11,5 +11,6 @@ $lang = array(
   "of" => "Is",
   "prev" => "Atgal",
   "next" => "Kitas",
+"images" => "Nuotraukos",
 );
 ?>

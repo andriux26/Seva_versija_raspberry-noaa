@@ -47,7 +47,7 @@ sudo apt-get install -yq \
   libhamlib4 libhamlib-utils
 sudo update-ca-certificates || true
 
-# NTP: jei turim systemd-timesyncd â€“ ijungiame; kitu atveju paliekame ntp
+# NTP: jei turim systemd-timesyncd – ijungiame; kitu atveju paliekame ntp
 if systemctl list-unit-files | grep -q '^systemd-timesyncd\.service'; then
   sudo systemctl unmask systemd-timesyncd 2>/dev/null || true
   sudo systemctl enable --now systemd-timesyncd 2>/dev/null || true
@@ -79,7 +79,7 @@ else
     warn "PREDICT nepavyko idiegti (tesiam)."
   fi
 fi
-# Symlinkâ€™as, nes projektas kviecia /usr/bin/predict
+# Symlink’as, nes projektas kviecia /usr/bin/predict
 sudo ln -sf /usr/local/bin/predict /usr/bin/predict
 
 # ---- Python deps in VENV (PEP 668 fix) ----
@@ -123,7 +123,7 @@ else
     sqlite3 "$REPO_DIR/panel.db" < "$REPO_DIR/templates/webpanel_schema.sql"
     ok "DB schema sukurta"
   else
-    warn "Nerasta templates/webpanel_schema.sql â€“ praleidziu DB schema"
+    warn "Nerasta templates/webpanel_schema.sql – praleidziu DB schema"
   fi
 fi
 
@@ -135,7 +135,7 @@ else
     sudo cp "$REPO_DIR/templates/modprobe.d/rtlsdr.conf" /etc/modprobe.d/rtlsdr.conf
     ok "DVB moduliai uzblokuoti"
   else
-    warn "Nerasta templates/modprobe.d/rtlsdr.conf â€“ praleidziu"
+    warn "Nerasta templates/modprobe.d/rtlsdr.conf – praleidziu"
   fi
 fi
 
@@ -167,7 +167,7 @@ else
   if [ -f "$REPO_DIR/software/wxtoimg-armhf-2.11.2-beta.deb" ]; then
     ARCH="$(uname -m || true)"
     if [ "$ARCH" = "aarch64" ]; then
-      run "64-bit OS aptikta â€“ ijungiame armhf multiarch WxToIMG'ui..."
+      run "64-bit OS aptikta – ijungiame armhf multiarch WxToIMG'ui..."
       sudo dpkg --add-architecture armhf
       sudo apt-get update
       sudo apt-get install -y \
@@ -176,12 +176,12 @@ else
     fi
     run "Diegiame WxToIMG..."
     if ! sudo dpkg -i "$REPO_DIR/software/wxtoimg-armhf-2.11.2-beta.deb"; then
-      warn "WxToIMG nepavyko idiegti â€“ praleidziu (sistema veiks be jo)."
+      warn "WxToIMG nepavyko idiegti – praleidziu (sistema veiks be jo)."
     else
       ok "WxToIMG idiegtas"
     fi
   else
-    warn "Nerasta software/wxtoimg-armhf-2.11.2-beta.deb â€“ praleidziu"
+    warn "Nerasta software/wxtoimg-armhf-2.11.2-beta.deb – praleidziu"
   fi
 fi
 
@@ -193,7 +193,7 @@ else
     cp "$REPO_DIR/templates/noaa.conf" "$HOME/.noaa.conf"
     ok "$HOME/.noaa.conf idiegtas"
   else
-    warn "Nerasta templates/noaa.conf â€“ praleidziu"
+    warn "Nerasta templates/noaa.conf – praleidziu"
   fi
 fi
 
@@ -205,7 +205,7 @@ else
     cp "$REPO_DIR/templates/predict.qth" "$HOME/.predict/predict.qth"
     ok "$HOME/.predict/predict.qth idiegtas"
   else
-    warn "Nerasta templates/predict.qth â€“ praleidziu"
+    warn "Nerasta templates/predict.qth – praleidziu"
   fi
 fi
 
@@ -216,7 +216,7 @@ else
     cp "$REPO_DIR/templates/wxtoimgrc" "$HOME/.wxtoimgrc"
     ok "$HOME/.wxtoimgrc idiegtas"
   else
-    warn "Nerasta templates/wxtoimgrc â€“ praleidziu"
+    warn "Nerasta templates/wxtoimgrc – praleidziu"
   fi
 fi
 
@@ -227,7 +227,7 @@ else
     cp "$REPO_DIR/templates/tweepy.conf" "$HOME/.tweepy.conf"
     ok "$HOME/.tweepy.conf idiegtas"
   else
-    warn "Nerasta templates/tweepy.conf â€“ praleidziu"
+    warn "Nerasta templates/tweepy.conf – praleidziu"
   fi
 fi
 
@@ -264,7 +264,7 @@ else
     sudo chmod +x /usr/bin/medet_arm
     ok "medet_arm idiegtas"
   else
-    warn "Nerastas software/medet_arm â€“ praleidziu"
+    warn "Nerastas software/medet_arm – praleidziu"
   fi
 fi
 
@@ -343,7 +343,7 @@ if ! grep -q "ramfs" /etc/fstab 2>/dev/null; then
     cat "$REPO_DIR/templates/fstab" | sudo tee -a /etc/fstab >/dev/null
     ok "ramfs irasytas i fstab"
   else
-    warn "Nerasta templates/fstab â€“ praleidziu ramfs irasa"
+    warn "Nerasta templates/fstab – praleidziu ramfs irasa"
   fi
 else
   ok "ramfs jau sukonfiguruotas"
@@ -404,10 +404,10 @@ if [ -d "$LANG_DIR" ] && [ -f /var/www/wx/Config.php ]; then
     done
     sudo sed -i -e "s/'lang' => '.*'$/'lang' => '${lang}'/" "/var/www/wx/Config.php"
   else
-    warn "Kalbu sarasas tuscias â€“ praleidziu"
+    warn "Kalbu sarasas tuscias – praleidziu"
   fi
 else
-  warn "Webpanel failai nerasti â€“ praleidziu kalbos nustatyma"
+  warn "Webpanel failai nerasti – praleidziu kalbos nustatyma"
 fi
 
 # ---- PHP timezone ----
@@ -417,7 +417,7 @@ if [ -f /var/www/wx/header.php ]; then
   tz_escaped=$(echo "${timezone:-Europe/Vilnius}" | sed 's/\//\\\//g')
   sudo sed -i -e "s/date_default_timezone_set('.*');/date_default_timezone_set('${tz_escaped}');/" "/var/www/wx/header.php"
 else
-  warn "Nerastas /var/www/wx/header.php â€“ praleidziu laiko zonos nustatyma"
+  warn "Nerastas /var/www/wx/header.php – praleidziu laiko zonos nustatyma"
 fi
 
 # ---- coords/timeoffset ----
@@ -432,7 +432,7 @@ read -rp "Laiko zonos offset (Vasara 3, Ziema 2): " tzoffset
 ok "Nustatymai pritaikyti. Patikrink $HOME/.noaa.conf"
 
 echo
-echo "Twitter nustatymai â€“ faile: $HOME/.tweepy.conf"
+echo "Twitter nustatymai – faile: $HOME/.tweepy.conf"
 echo
 
 # ---- WXTOIMG license acceptance (tik jei idiegtas) ----
@@ -440,7 +440,7 @@ set +e
 if command -v xwxtoimg >/dev/null 2>&1; then
   echo "WxToIMG idiegtas. Jei reikia, paleisk licencijos langa: xwxtoimg"
 else
-  warn "WxToIMG neidiegtas â€“ licencijos lango nepraleidinesim."
+  warn "WxToIMG neidiegtas – licencijos lango nepraleidinesim."
 fi
 set -e
 
